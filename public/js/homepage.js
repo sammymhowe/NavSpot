@@ -1,8 +1,8 @@
 function check(form) {
-  if(form.userid.value == "NavSpotUser" && form.password.value == "NavSpotPassword") {
+  if(form.userid.value == "NavSpotUser" && form.password.value == "Password123!") {
     window.open('/dashboard', '_top');
   }
   else {
-    alert("Error Password or Username")
+    alert("Invalid username or password.")
   }
 }
