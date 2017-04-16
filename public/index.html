@@ -1,36 +1,32 @@
 <!DOCTYPE html>
+<html ng-app="NavSpot">
 
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <!-- Web browser tab title -->
-  <title>NavSpot</title>
+  <!-- Angular and JQuery -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="core.js"></script>
 
+  <title>NavSpot</title>
   <!-- Bootstrap Core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- MetisMenu CSS -->
   <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link href="../css/sb-admin-2.css" rel="stylesheet">
+   <link href="../css/styles.css" rel="stylesheet">
   <!-- Morris Charts CSS -->
   <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
   <!-- Custom Fonts -->
   <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-  <script type="text/javascript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-  <!-- <script type="text/javascript" -->
-          <!-- src="http://www.your-domain.com/easy-comment/jquery.easy-comment.min.js"></script> -->
 
-
-  <title>NavSpot Tester</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <meta charset="utf-8">
 
   <!-- TODO: Put this code into a CSS file -->
   <style>
@@ -41,26 +37,31 @@
   </style>
 </head>
 
-
-<body>
-
+<body ng-controller="mainController">
   <div id="wrapper">
     <!-- Navigation -->
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
       <div class="navbar-header">
-        <img src="/images/logo.png" height="60px" style="margin-left: 20px; margin-top: 2px">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <img src="/images/logo.png" height="60px" style="margin-left: 10px; margin-top: 10px">
       </div>
 
       <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+          </a>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
           </a>
           <ul class="dropdown-menu dropdown-user">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-            </li>
-            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-            </li>
             <li class="divider"></li>
             <li><a href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
             </li>
@@ -69,12 +70,11 @@
       </ul>
 
       <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse"> <!-- Don't need this line??? -->
+        <div class="sidebar-nav navbar-collapse">
           <ul class="nav" id="side-menu">
-            <!-- TODO: Implement search bar functionality -->
             <li class="sidebar-search">
               <div class="input-group custom-search-form">
-                <input type="text" class="form-control" placeholder="Search events">
+                <input type="text" class="form-control" placeholder="Search...">
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="button">
                   <i class="fa fa-search"></i>
@@ -83,27 +83,23 @@
               </div>
             </li>
             <li>
-              <a href="#"><i class="fa fa-medkit fa-fw"></i> My Events<span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level">
-                <li>
-                  <a href="#"><i class="fa fa-square" style="padding-right: 10px; color: orange"></i>EEL3701 Study Group</a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-square fa-fw" style="padding-right: 10px; color: orange"></i>COP3530 Study Group</a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-square fa-fw" style="padding-right: 10px; color: blue"></i>ACE GBM</a>
-                </li>
+              <a href="#"><i class="fa fa-map-marker fa-fw"></i>All Events<span class="fa arrow"></span></a>
+              <ul id="event-sidebar-list" class="nav nav-second-level">
+                <div ng-repeat="event in events">
+                  <li>
+                    <a href="#"><i class="fa fa-square fa-fw"></i> {{ event.eventName }}</a>
+                  </li>
+                </div>
               </ul>
             </li>
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
 
     <div id="page-wrapper" class="col-lg-10" style="margin-top: 10px">
       <div class="row">
-                <div class="panel panel-primary">
+        <div class="panel panel-primary">
           <!-- Titling -->
           <div class="panel-heading text-center">
             <i class="fa fa-map-marker fa-3x"> Add Event</i>
@@ -111,7 +107,6 @@
           <div class="panel-body">
             <!-- Map -->
             <div class="col-lg-6 col-md-6 panel panel-blue">
-              <!-- MAP -->
               <div id="map"></div>
               <script>
                 function initMap() {
@@ -119,7 +114,7 @@
                   var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 14,
                     center: uluru
-                  }); 
+                  });
                   // Marker Images
                   var image2 = 'https://image.ibb.co/kRpLak/98131acc6d38e230b3b02342aef1ef1b.jpg';
                   var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
@@ -188,44 +183,65 @@
             </div>
             <!-- Event form -->
             <div class="col-lg-6">
-              <form name="eventForm" id="eventForm" action="/dashboard" method="post">
+              <form>
                <div class="form-group">
-                  <label for="eventName">Event Name</label>
-                  <input type="text" class="form-control" name="eventName" placeholder="Event name">
+                  <label>Event Name</label>
+                  <input type="text" class="form-control" ng-model="formData.eventName" placeholder="Event name">
                 </div>
-                <div class="form-group">
-                  <label for="eventType">Type</label>
-                  <select class="form-control" name="eventType">
-                    <option>Study Group</option>
-                    <option>Food</option>
-                    <option>Meeting</option>
-                    <option>Danger</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="eventLocation">Location</label>
-                  <select class="form-control" name="eventLocation">
-                    <option>Marston Library</option>
-                    <option>Reitz Union</option>
-                    <option>Library West</option>
-                    <option>French Fries</option>
-                    <option>Stadium</option>
-                    <option>O'Connell Center</option>
-                    <option>Southwest Rec</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="eventDetails">Event Details</label>
-                  <textarea class="form-control" name="eventDetails" rows="2" placeholder="Add details about your event"></textarea>
-                </div>
+                 <div class="form-group">
+                   <label>Type</label>
+                   <select class="form-control" ng-model="formData.eventType">
+                     <option>Study Group</option>
+                     <option>Food</option>
+                     <option>Meeting</option>
+                     <option>Danger</option>
+                   </select>
+                 </div>
+                 <div class="form-group">
+                   <label>Location</label>
+                   <select class="form-control" ng-model="formData.eventLocation">
+                     <option>Marston Library</option>
+                     <option>Reitz Union</option>
+                     <option>Library West</option>
+                     <option>French Fries</option>
+                     <option>Stadium</option>
+                     <option>O'Connell Center</option>
+                     <option>Southwest Rec</option>
+                   </select>
+                 </div>
+                 <div class="form-group">
+                   <label>Event Details</label>
+                   <textarea class="form-control" ng-model="formData.eventDetails" rows="2" placeholder="Add details about your event"></textarea>
+                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button id="add-event"type="submit" class="btn btn-primary"  ng-click="createEvent()">Submit</button>
                 </div>
               </form>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
+
+  <!-- jQuery -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- Metis Menu Plugin JavaScript -->
+  <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+  <!-- Morris Charts JavaScript -->
+  <script src="../vendor/raphael/raphael.min.js"></script>
+  <script src="../vendor/morrisjs/morris.min.js"></script>
+  <script src="../data/morris-data.js"></script>
+
+  <!-- Custom Theme JavaScript -->
+  <script src="../js/sb-admin-2.js"></script>
+
 </body>
+
+</html>
