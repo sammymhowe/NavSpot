@@ -6,6 +6,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "angular-route": "^1.6.4",
     "async": "^1.5.2",
     "body-parser": "^1.17.1",
     "dotenv": "^2.0.0",
