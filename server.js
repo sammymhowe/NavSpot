@@ -62,6 +62,6 @@ app.get('*', function(req, res) {
   res.sendFile('./public/index.html');
 });
 
-
+/* * * * * * * * * * * * Start the server * * * * * * * * * * * */
 app.listen(8080);
 console.log("App listening on port 8080");
