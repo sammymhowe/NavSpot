@@ -8,6 +8,7 @@ function placeMarker(data, map) {
   var study = 'http://i.imgur.com/Y4OXg9o.png';
   var group = 'http://i.imgur.com/ylIkOcp.png';
   var social = 'http://i.imgur.com/97NZuMp.png';
+  //test commit AS
 
   var assignListener = function(markerObj, infoWindowObj) {
     return function() {
@@ -25,6 +26,15 @@ function placeMarker(data, map) {
     mkmap.lastmarkeropened = marker;
   };
 
+  /*var toggleBounce = function() {
+          if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+          } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+          }
+        }
+        */
+
   // Close the info window
   google.maps.event.addListener(map, 'click', function() {
     infoWindow.close();
@@ -33,6 +43,7 @@ function placeMarker(data, map) {
 
   // Loop start
   for(i=0; i < data.length; i++) {
+    var rando = Math.random()*0.0001;
     console.log(data[i].eventLocation + " OF TYPE " + data[i].eventType);
     if (data[i].eventName != "") {
       title = data[i].eventName;
@@ -122,6 +133,14 @@ function placeMarker(data, map) {
       lngi = -82.347717;
       console.log(data[i].eventLocation + " not found");
     }
+
+    for(j=0; j < data.length; j++) {
+      if(data[i].eventLocation == data[j].eventLocation){
+        lati = lati+rando;
+        lngi = lngi+rando;
+      }
+    }
+
     if (data[i].eventType == "Study Group") {
       image = study;
     }
@@ -146,14 +165,21 @@ function placeMarker(data, map) {
       title : title,
       map: map,
       icon: image,
+      animation: google.maps.Animation.DROP,
       details: details
     });
 
+    //animations
+    //marker.addListener('click', toggleBounce);
+
     // attach event to open info window
-    google.maps.event.addListener(marker[ i ], 'click', onMarkerClick );
+    google.maps.event.addListener(marker[ i ], 'click', onMarkerClick);
+    //google.maps.event.addListener(marker[ i ], 'click', toggleBounce);
     // end loop
   }
 }
+
+
 
 function initMap(data) {
   var uluru = {lat: 29.643220, lng: -82.350427};
