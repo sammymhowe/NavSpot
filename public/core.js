@@ -198,7 +198,7 @@ function mainController($scope, $http) {
 
   // When submitting the add form, send the text to the node API
   $scope.createEvent = function() {
-    var validated;
+    var validated = false;
 
     // Make sure all fields are filled out
     if (!$scope.formData.eventName) {
