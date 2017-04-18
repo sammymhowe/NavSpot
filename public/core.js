@@ -185,15 +185,18 @@ function mainController($scope, $http) {
 
   // when submitting the add form, send the text to the node API
   $scope.createEvent = function() {
-    $http.post('/api/events', $scope.formData)
-      .success(function(data) {
-        $scope.formData = {}; // clear the form so our user is ready to enter another
-        $scope.events = data;
-        console.log(data);
-      })
-      .error(function(data) {
-        console.log('Error: ' + data);
-      });
+    // check form validation first
+    if ($scope.validateForm ()) {
+      $http.post('/api/events', $scope.formData)
+        .success(function(data) {
+          $scope.formData = {}; // clear the form so our user is ready to enter another
+          $scope.events = data;
+          console.log(data);
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+    }
   };
 
   // if a field is left empty, sent alert, return false
@@ -214,6 +217,8 @@ function mainController($scope, $http) {
       alert("Please include some details about your event!");
       return false;
     }
-    return true;
+    $scope.createEvent;
+    //refresh map 
+    location.href = "map"
   }
 }

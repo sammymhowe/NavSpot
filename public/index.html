@@ -93,7 +93,7 @@
           </div>
           <!-- Event form -->
           <div class="col-md-6">
-            <form name="myFor" ng-submit="validateForm()">
+            <form name="myForm" ng-submit="validateForm()">
               <!-- Event name -->
               <div class="form-group">
                 <label class="styleone">Event Name</label>
@@ -138,7 +138,7 @@
                <textarea class="form-control" ng-model="formData.eventDetails" rows="2" placeholder="Add details about your event"></textarea>
               </div>
               <div class="text-center">
-                <button class="btn btn-info"  ng-click="createEvent()">Submit</button>
+                <button class="btn btn-info"  type="submit">Submit</button>
               </div>
             </form>
           </div>
