@@ -33,7 +33,7 @@ var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
     infoWindow.close();
   });
   var marker = [] ;
-  
+
   // loop start
   for(i=0; i < data.length; i++){
     console.log(data[i].eventLocation + " OF TYPE " + data[i].eventType);
@@ -122,7 +122,7 @@ var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
       // attach event to open info window
       google.maps.event.addListener(marker[ i ], 'click', onMarkerClick );
       // end loop
-      
+
   }
 }
 

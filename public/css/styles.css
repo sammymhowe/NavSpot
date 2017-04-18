@@ -427,3 +427,27 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+#map {
+  height: 400px;
+  width: 100%;
+}
+
+.styleone {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.styletwo {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #595959;
+}
+.stylethree {
+  margin-left: 25px;
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 1.4;
+}
