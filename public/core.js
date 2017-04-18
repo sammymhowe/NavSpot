@@ -26,15 +26,6 @@ function placeMarker(data, map) {
     mkmap.lastmarkeropened = marker;
   };
 
-  /*var toggleBounce = function() {
-          if (marker.getAnimation() !== null) {
-            marker.setAnimation(null);
-          } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-          }
-        }
-        */
-
   // Close the info window
   google.maps.event.addListener(map, 'click', function() {
     infoWindow.close();
@@ -169,12 +160,8 @@ function placeMarker(data, map) {
       details: details
     });
 
-    //animations
-    //marker.addListener('click', toggleBounce);
-
     // attach event to open info window
     google.maps.event.addListener(marker[ i ], 'click', onMarkerClick);
-    //google.maps.event.addListener(marker[ i ], 'click', toggleBounce);
     // end loop
   }
 }
@@ -209,42 +196,55 @@ function mainController($scope, $http) {
       console.log('Error: ' + data);
     });
 
-  // when submitting the add form, send the text to the node API
+  // When submitting the add form, send the text to the node API
   $scope.createEvent = function() {
-    // check form validation first
-    if ($scope.validateForm ()) {
+    var validated;
+
+    // Make sure all fields are filled out
+    if (!$scope.formData.eventName) {
+      alert("Please give your event a name!");
+      validated = false;
+    }
+    else if (!$scope.formData.eventType) {
+      alert("Please choose an event type!");
+      validated =  false;
+    }
+    else if (!$scope.formData.eventLocation) {
+      alert("Please choose a location!");
+      validated = false;
+    }
+    else if (!$scope.formData.eventDetails) {
+      alert("Please include some details about your event!");
+      validated =  false;
+    }
+    else {
+      validated = true;
+    }
+    // Check form validation first
+    if (validated) {
       $http.post('/api/events', $scope.formData)
         .success(function(data) {
-          $scope.formData = {}; // clear the form so our user is ready to enter another
+          $scope.formData = {}; // Clear the form so user can fill out another form
           $scope.events = data;
           console.log(data);
         })
         .error(function(data) {
           console.log('Error: ' + data);
         });
+      // Refresh map
+      location.href = "map";
     }
   };
 
-  // if a field is left empty, sent alert, return false
-  $scope.validateForm = function() {
-    if (!$scope.formData.eventName) {
-      alert("Please give your event a name!");
-      return false;
-    }
-    else if (!$scope.formData.eventType) {
-      alert("Please choose an event type!");
-      return false;
-    }
-    else if (!$scope.formData.eventLocation) {
-      alert("Please choose a location!");
-      return false;
-    }
-    else if (!$scope.formData.eventDetails) {
-      alert("Please include some details about your event!");
-      return false;
-    }
-    $scope.createEvent;
-    //refresh map 
-    location.href = "map"
-  }
+  // Delete an event after checking it
+  $scope.deleteEvent = function(id) {
+    $http.delete('/api/events/' + id)
+      .success(function(data) {
+        $scope.events = data;
+        console.log(data);
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      });
+    };
 }

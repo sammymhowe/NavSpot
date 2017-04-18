@@ -53,7 +53,7 @@
         <ul class="nav" id="side-menu">
           <li></li>
           <li>
-            <a href="#" style="color: black"><i class="fa fa-calendar fa-fw"></i><b>  All Events</b><span class="fa arrow"></span></a>
+            <a href="#" class="styleAllEvents"><i class="fa fa-calendar fa-fw"></i><b>  All Events</b><span class="fa arrow"></span></a>
             <ul id="event-sidebar-list" class="nav nav-second-level">
               <!-- Search functionality -->
               <div class="input-group">
@@ -65,17 +65,21 @@
                 </span>
               </div>
               <!-- All of the events -->
-              <div ng-repeat="event in events | filter:searchText">
+              <div class="addleftpadding" ng-repeat="event in events | filter:searchText">
                 <a href="" style="text-decoration: none" class="styletwo" ng-click="showme=!showme"><i class="fa fa-map-marker fa-fw" style="color: #5bc0de"></i> {{ event.eventName }}</a>
                 <div class="stylethree" ng-show="showme">Location: {{ event.eventLocation }}</div>
                 <div class="stylethree" ng-show="showme">Details: {{ event.eventDetails }}</div>
+                <div ng-show="showme" style="margin-left: 25px;"><button ng-click="deleteEvent(event._id)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></div>
               </div>
+
             </ul>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
+
 
   <div id="page-wrapper" style="background-color: white">
     <div class="row">
@@ -93,7 +97,7 @@
           </div>
           <!-- Event form -->
           <div class="col-md-6">
-            <form name="myForm" ng-submit="validateForm()">
+            <form name="myForm">
               <!-- Event name -->
               <div class="form-group">
                 <label class="styleone">Event Name</label>
@@ -138,13 +142,15 @@
                <textarea class="form-control" ng-model="formData.eventDetails" rows="2" placeholder="Add details about your event"></textarea>
               </div>
               <div class="text-center">
-                <button class="btn btn-info"  type="submit">Submit</button>
+                <button class="btn btn-info"  ng-click="createEvent()">Submit</button>
               </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+
+
   </div>
 </body>
 </html>

@@ -39,25 +39,46 @@ app.get('/api/events', function(req, res) {
 app.post('/api/events', function(req, res) {
   // Create event
 	Event.create({
-      eventName : req.body.eventName,
-			eventType : req.body.eventType,
-			eventLocation : req.body.eventLocation,
-			eventDetails : req.body.eventDetails,
-      done : false
-    }, function(err, event) {
-		if (err) {
-			res.send(err);
-		}
-		// Display all the events after insertion
-		Event.find(function(err, events) {
-			if (err) {
-				res.send(err);
-			}
-			res.json(events);
-		});
+    eventName : req.body.eventName,
+		eventType : req.body.eventType,
+		eventLocation : req.body.eventLocation,
+		eventDetails : req.body.eventDetails,
+    done : false
+  },
+  function(err, event) {
+  	if (err) {
+  		res.send(err);
+  	}
+  	// Display all the events after insertion
+  	Event.find(function(err, events) {
+  		if (err) {
+  			res.send(err);
+  		}
+  		res.json(events);
+  	});
 	});
 });
 
+/* * * * * * * * * * * * API - DELETE events * * * * * * * * * * * */
+app.delete('/api/events/:event_id', function(req, res) {
+  Event.remove({
+    _id : req.params.event_id
+  },
+  function(err, todo) {
+    if (err) {
+      res.send(err);
+    }
+    // Get and return all the events after you create another
+    Event.find(function(err, events) {
+      if (err) {
+        res.send(err)
+      }
+      res.json(events);
+    });
+  });
+});
+
+/* * * * * * * * * * * * Route the home page * * * * * * * * * * * */
 app.get('*', function(req, res) {
   res.sendFile('./public/index.html', { root : '.'});
 });

@@ -431,7 +431,12 @@ table.dataTable thead .sorting:after {
   height: 400px;
   width: 100%;
 }
-
+.styleAllEvents {
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 1.4;
+  color: black;
+}
 .stylezero {
   margin-bottom: 5px;
   font-size: 40px;
@@ -446,14 +451,14 @@ table.dataTable thead .sorting:after {
 }
 .styletwo {
   margin-bottom: 5px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.4;
   color: #595959;
 }
 .stylethree {
   margin-left: 25px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 200;
   line-height: 1.4;
 }
@@ -472,4 +477,7 @@ table.dataTable thead .sorting:after {
   font-weight: 400;
   line-height: 1.4;
   color: #5bc0de;
+}
+.addleftpadding {
+  margin-left: 5px;
 }
