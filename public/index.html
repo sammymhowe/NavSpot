@@ -48,15 +48,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <img src="/images/logo.png" height="60px" style="position: absolute; left: 50%; margin-left: -50px; display: block;">
+        <img src="/images/logo.png" height="60px" style="margin-left: 20px">
       </div>
 
       <ul class="nav navbar-top-links navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-          </a>
-        </li>
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -96,84 +92,16 @@
 
     <div id="page-wrapper" class="col-lg-10" style="margin-top: 10px">
       <div class="row">
-        <div class="panel panel-primary">
+        <div>
           <!-- Titling -->
-          <div class="panel-heading text-center">
-            <i class="fa fa-map-marker fa-3x"> Add Event</i>
+          <div>
+            <center><i class="fa fa-map-marker fa-3x"> Add Event</i></center>
           </div>
-          <div class="panel-body">
+          <br>
+          <div>
             <!-- Map -->
-            <div class="col-lg-6 col-md-6 panel panel-blue">
+            <div class="col-lg-6 col-md-6">
               <div id="map"></div>
-              <script>
-                function initMap() {
-                  var uluru = {lat: 29.643220, lng: -82.350427};
-                  var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 14,
-                    center: uluru
-                  });
-                  // Marker Images
-                  var image2 = 'https://image.ibb.co/kRpLak/98131acc6d38e230b3b02342aef1ef1b.jpg';
-                  var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
-                  var image3 = 'http://www.poolcleaningfl.com/wp-content/uploads/2014/11/map_icon.png';
-                  // Map Locations
-                  var centerMarker = new google.maps.Marker({
-                    position: {lat: 29.643894, lng: -82.354748},
-                    map: map,
-                    icon: image3
-                  });
-                  var westMarker = new google.maps.Marker({
-                    position: {lat: 29.651409, lng: -82.342909},
-                    map: map,
-                    icon: image
-                  });
-                  var eastMarker = new google.maps.Marker({
-                    position: {lat: 29.650871, lng: -82.341713},
-                    map: map,
-                    icon: image
-                  });
-                  var americasMarker = new google.maps.Marker({
-                    position: {lat: 29.650533, lng: -82.342684},
-                    map: map,
-                    icon: image
-                  });
-                  var hubMarker = new google.maps.Marker({
-                    position: {lat: 29.648077, lng: -82.345496},
-                    map: map,
-                    icon: image
-                  });
-                  var turlingtonMarker = new google.maps.Marker({
-                    position: {lat: 29.649085, lng: -82.343699},
-                    map: map,
-                    icon: image
-                  });
-                  var marstonMarker = new google.maps.Marker({
-                    position: {lat: 29.647965, lng: -82.344005},
-                    map: map,
-                    icon: image
-                  });
-                  var reitzMarker = new google.maps.Marker({
-                    position: {lat: 29.645793, lng: -82.347717},
-                    map: map,
-                    icon: image
-                  });
-                  var nebMarker = new google.maps.Marker({
-                    position: {lat: 29.642287, lng: -82.347072},
-                    map: map,
-                    icon: image
-                  });
-                  var dungeonMarker = new google.maps.Marker({
-                    position: {lat: 29.648323, lng: -82.344293},
-                    map: map,
-                    icon: image
-                  });
-                  var lawMarker = new google.maps.Marker({
-                    position: {lat: 29.649230, lng: -82.359026},
-                    map: map,
-                    icon: image
-                  });
-                }
-              </script>
               <script async defer
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeD3jZN_dJj1DfvZFji9FL8bGevJM0qOQ&callback=initMap">
               </script>
@@ -216,10 +144,8 @@
               </form>
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 
