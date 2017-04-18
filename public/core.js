@@ -196,6 +196,24 @@ function mainController($scope, $http) {
       });
   };
 
-
-
+  // if a field is left empty, sent alert, return false
+  $scope.validateForm = function() {
+    if (!$scope.formData.eventName) {
+      alert("Please give your event a name!");
+      return false;
+    }
+    else if (!$scope.formData.eventType) {
+      alert("Please choose an event type!");
+      return false;
+    }
+    else if (!$scope.formData.eventLocation) {
+      alert("Please choose a location!");
+      return false;
+    }
+    else if (!$scope.formData.eventDetails) {
+      alert("Please include some details about your event!");
+      return false;
+    }
+    return true;
+  }
 }
