@@ -20,9 +20,7 @@ var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
     };
   };
 
-  // infoWindow working
   var infoWindow = new google.maps.InfoWindow;
-
   // open info window
   var onMarkerClick = function() {
     var marker = this;
@@ -30,23 +28,20 @@ var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
     infoWindow.open(map, marker);
     mkmap.lastmarkeropened = marker;
   };
-
   // close the info window
   google.maps.event.addListener(map, 'click', function() {
     infoWindow.close();
   });
-
   var marker = [] ;
   
   // loop start
-  
   for(i=0; i < data.length; i++){
     console.log(data[i].eventLocation + " OF TYPE " + data[i].eventType);
     if(data[i].eventName != ""){
       title = data[i].eventName;
     }
     if(data[i].eventDetails != ""){
-      details = data[i].eventDetails;
+      details = '<p> <b>' + data[i].eventName + '</b> <br> <b>' + data[i].eventLocation + '</b> <br>' + data[i].eventDetails + '</p>';
     }
 
       if(data[i].eventLocation == "Library West"){
@@ -116,21 +111,6 @@ var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
         console.log("default icon used for " + i);
       }
 
-      // WORK IN PROGRESS
-      var infowindow = new google.maps.InfoWindow({
-          content: details
-        });
-
-      newMarker = new google.maps.Marker({
-        position: {lat: lati, lng: lngi},
-        title : title,
-        map: map,
-        icon: image,
-        details: details
-      });
-
-      var html = '<h1>Hello world</h1>'; // fill in whatever
-
       marker[ i ] = new google.maps.Marker({
         position: {lat: lati, lng: lngi},
         title : title,
@@ -169,6 +149,28 @@ function initMap(data) {
   });
   placeMarker(data, map);
 }
+
+/*
+function checkform() {
+  if(data[i].eventType == ""){
+      alert('REQUIRED FIELD ERROR: Please select event type')
+      return false;
+    }
+  else if(data[i].eventLocation == ""){
+      alert('REQUIRED FIELD ERROR: Please select location')
+      return false;
+    }
+  else if(data[i].eventName == ""){
+      alert('REQUIRED FIELD ERROR: Please enter name')
+      return false;
+    }
+  else if(data[i].eventDetails == ""){
+      alert('REQUIRED FIELD ERROR: Please enter event details')
+      return false;
+    }
+  return true;
+}
+*/
 
 
 function mainController($scope, $http) {
