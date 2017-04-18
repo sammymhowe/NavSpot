@@ -14,6 +14,32 @@ var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
   var study = 'http://i.imgur.com/Y4OXg9o.png';
   var group = 'http://i.imgur.com/ylIkOcp.png';
 
+  var assignListener = function(markerObj, infoWindowObj){
+    return function() {
+      infoWindowObj.open(map, markerObj);
+    };
+  };
+
+  // infoWindow working
+  var infoWindow = new google.maps.InfoWindow;
+
+  // open info window
+  var onMarkerClick = function() {
+    var marker = this;
+    infoWindow.setContent( marker.details );
+    infoWindow.open(map, marker);
+    mkmap.lastmarkeropened = marker;
+  };
+
+  // close the info window
+  google.maps.event.addListener(map, 'click', function() {
+    infoWindow.close();
+  });
+
+  var marker = [] ;
+  
+  // loop start
+  
   for(i=0; i < data.length; i++){
     console.log(data[i].eventLocation + " OF TYPE " + data[i].eventType);
     if(data[i].eventName != ""){
@@ -90,6 +116,7 @@ var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
         console.log("default icon used for " + i);
       }
 
+      // WORK IN PROGRESS
       var infowindow = new google.maps.InfoWindow({
           content: details
         });
@@ -98,14 +125,25 @@ var image = 'https://image.ibb.co/nmGCo5/Spot3.png';
         position: {lat: lati, lng: lngi},
         title : title,
         map: map,
-        icon: image
+        icon: image,
+        details: details
       });
 
-      newMarker.addListener('click', function() { //needs some work to connect to each marker instead of last one placed
-          infowindow.open(map, newMarker);
-        });
-  }
+      var html = '<h1>Hello world</h1>'; // fill in whatever
 
+      marker[ i ] = new google.maps.Marker({
+        position: {lat: lati, lng: lngi},
+        title : title,
+        map: map,
+        icon: image,
+        details: details
+      });
+
+      // attach event to open info window
+      google.maps.event.addListener(marker[ i ], 'click', onMarkerClick );
+      // end loop
+      
+  }
 }
 
 function initMap(data) {
