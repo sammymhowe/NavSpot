@@ -8,6 +8,7 @@ function placeMarker(data, map) {
   var study = 'http://i.imgur.com/Y4OXg9o.png';
   var group = 'http://i.imgur.com/ylIkOcp.png';
   var social = 'http://i.imgur.com/97NZuMp.png';
+  //test commit AS
 
   var assignListener = function(markerObj, infoWindowObj) {
     return function() {
