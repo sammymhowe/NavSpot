@@ -30,6 +30,10 @@
   <script src="../vendor/metisMenu/metisMenu.min.js"></script>
   <!-- Custom Theme JavaScript -->
   <script src="../js/sb-admin-2.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 </head>
 
 <body ng-controller="mainController">
@@ -44,26 +48,28 @@
       </button>
       <img src="/images/logo.png" height="50px" style="margin-left: 20px">
     </div>
-    <div class="navbar-default sidebar" role="navigation">
+    <div style="border-left:4px solid #5bc0de" class="navbar-default sidebar" role="navigation">
       <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
           <li></li>
           <li>
-            <a href="#"><i class="fa fa-calendar fa-fw"></i><b> All Events</b><span class="fa arrow"></span></a>
+            <a href="#" style="color: black"><i class="fa fa-calendar fa-fw"></i><b>  All Events</b><span class="fa arrow"></span></a>
             <ul id="event-sidebar-list" class="nav nav-second-level">
-                <div class="input-group">
-                  <input ng-model="searchText" class="form-control">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </span>
-                </div>
-                <div ng-repeat="event in events | filter:searchText">
-                  <a href="" class="styletwo" ng-click="showme=!showme"><i class="fa fa-map-marker fa-fw" style="color: orange"></i> {{ event.eventName }}</a>
-                  <div class="stylethree"ng-show="showme">Location:  {{ event.eventLocation }}</div>
-                  <div class="stylethree" ng-show="showme">Details:  {{ event.eventDetails }}</div>
-                </div>
+              <!-- Search functionality -->
+              <div class="input-group">
+                <input ng-model="searchText" class="form-control">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </span>
+              </div>
+              <!-- All of the events -->
+              <div ng-repeat="event in events | filter:searchText">
+                <a href="" style="text-decoration: none" class="styletwo" ng-click="showme=!showme"><i class="fa fa-map-marker fa-fw" style="color: #5bc0de"></i> {{ event.eventName }}</a>
+                <div class="stylethree" ng-show="showme">Location: {{ event.eventLocation }}</div>
+                <div class="stylethree" ng-show="showme">Details: {{ event.eventDetails }}</div>
+              </div>
             </ul>
           </li>
         </ul>
@@ -75,7 +81,7 @@
     <div class="row">
       <div>
         <!-- Titling -->
-        <center><h1 class="display-4"><i class="fa fa-map-marker" aria-hidden="true"></i> Add Event to Map</h1></center>
+        <center><h1 class="stylezero" style="color: #5bc0de"><i class="fa fa-map-marker" aria-hidden="true"></i>  Add Event</h1></center>
         <br>
         <div>
           <!-- Map -->
@@ -88,37 +94,51 @@
           <!-- Event form -->
           <div class="col-md-6">
             <form>
-             <div class="form-group">
+              <!-- Event name -->
+              <div class="form-group">
                 <label class="styleone">Event Name</label>
                 <input type="text" class="form-control" ng-model="formData.eventName" placeholder="Event name">
               </div>
-               <div class="form-group">
-                 <label class="styleone">Type</label>
-                 <select class="form-control" ng-model="formData.eventType">
-                   <option>Study Group</option>
-                   <option>Food</option>
-                   <option>Meeting</option>
-                   <option>Danger</option>
-                 </select>
-               </div>
-               <div class="form-group">
-                 <label class="styleone">Location</label>
-                 <select class="form-control" ng-model="formData.eventLocation">
-                   <option>Marston Library</option>
-                   <option>Reitz Union</option>
-                   <option>Library West</option>
-                   <option>French Fries</option>
-                   <option>Stadium</option>
-                   <option>O'Connell Center</option>
-                   <option>Southwest Rec</option>
-                 </select>
-               </div>
-               <div class="form-group">
-                 <label class="styleone">Event Details</label>
-                 <textarea class="form-control" ng-model="formData.eventDetails" rows="2" placeholder="Add details about your event"></textarea>
-               </div>
+              <!-- Event type -->
+              <div class="form-group">
+               <label class="styleone">Type</label>
+               <select class="form-control selectpicker" ng-model="formData.eventType">
+                 <option>Study Group</option>
+                 <option>Food</option>
+                 <option>Meeting</option>
+                 <option>Social</option>
+                 <option>Danger</option>
+               </select>
+              </div>
+              <!-- Event location -->
+              <div class="form-group">
+               <label class="styleone">Location</label>
+               <select class="form-control selectpicker" data-live-search="true" ng-model="formData.eventLocation">
+                 <option>Marston Library</option>
+                 <option>Reitz Union</option>
+                 <option>Library West</option>
+                 <option>French Fries</option>
+                 <option>Stadium</option>
+                 <option>O'Connell Center</option>
+                 <option>Southwest Rec</option>
+                 <option>Little Hall</option>
+                 <option>NEB</option>
+                 <option>Lake Alice</option>
+                 <option>Flavet Field</option>
+                 <option>Levin College of Law Building</option>
+                 <option>Heavener School of Business Building</option>
+                 <option>Larsen Hall</option>
+                 <option>Phillips Center</option>
+                 <option>College of Medicine Building</option>
+               </select>
+              </div>
+              <!-- Event details -->
+              <div class="form-group">
+               <label class="styleone">Event Details</label>
+               <textarea class="form-control" ng-model="formData.eventDetails" rows="2" placeholder="Add details about your event"></textarea>
+              </div>
               <div class="text-center">
-                <button id="add-event"type="submit" class="btn btn-primary"  ng-click="createEvent()">Submit</button>
+                <button class="btn btn-info"  ng-click="createEvent()">Submit</button>
               </div>
             </form>
           </div>

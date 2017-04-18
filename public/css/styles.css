@@ -432,10 +432,16 @@ table.dataTable thead .sorting:after {
   width: 100%;
 }
 
+.stylezero {
+  margin-bottom: 5px;
+  font-size: 40px;
+  font-weight: 300;
+}
+
 .styleone {
   margin-bottom: 5px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.4;
 }
 .styletwo {
@@ -450,4 +456,20 @@ table.dataTable thead .sorting:after {
   font-size: 14px;
   font-weight: 200;
   line-height: 1.4;
+}
+.stylefour {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.stylefourhalf {
+  font-size: 13px;
+  font-weight: 200;
+  line-height: 1.4;
+}
+.stylefive {
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #5bc0de;
 }
